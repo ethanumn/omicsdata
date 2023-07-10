@@ -1,0 +1,42 @@
+import os, sys, argparse
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "src", "omicsdata", "ssm", "convert"))
+
+from vcf_to_ssm import VCF_To_SSM
+
+def main():
+    """
+    Parses arguments and uses VCF_TO_SSM class to generate a .params.json and .ssm file from a .vcf file
+    """
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("in_fn", type=str,
+                        help="vcf file that will be converted to an .ssm and .params.json file")
+    parser.add_argument("ssm_fn", type=str,
+                        help="Name which will be used to name the .ssm and .params.json file that \
+                             are outputted (e.g. out_file.ssm, out_file.params.json")
+    parser.add_argument("-p", "--params-fn", default="", type=str,
+                        help="Name of the parameters file to write to. If no argument is given, then  \
+                              parameters file will not be written.")
+
+    args = parser.parse_args()
+
+
+    print("Processing vcf file ...")
+
+    # initializing class calls all processing functions and prepares the out_df
+    vcf_to_ssm = VCF_To_SSM(args.in_fn)
+
+    print("Writing ssm file ...")
+
+    # write SSM file
+    vcf_to_ssm.write_ssm_file(args.ssm_fn)
+
+    # write the params file
+    if len(args.params_fn) > 0:
+        print("Writing params.json file ...")
+        vcf_to_ssm.write_out_params(args.params_fn)
+
+    print("Completed.")
+
+if __name__ == "__main__":
+    main()
