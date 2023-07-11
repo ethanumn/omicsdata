@@ -3,13 +3,22 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-omicsdata
-=====================================
-**omicsdata** is a package for loading, writing, and manipulating genomics data files. 
+Overview
+=========================
+
+The **omicsdata** package is a package for reading, writing, and manipulating genomics data. This project is under active development.
 
 .. note::
     This package is under active development.
-    
+
+What can I do with the **omicsdata** package?
+-----------------------------------------------
+
+* Read and manipulate simple somatic mutation files (*.ssm*)
+* Write zipped archives containing *numpy* datatypes
+* Manipulate tree structures
+
+
 Modules 
 =====================================
 
@@ -17,6 +26,8 @@ Modules
    :maxdepth: 2
    :caption: Contents:
 
+   install
+   brief
    modules
 
 Indices and tables

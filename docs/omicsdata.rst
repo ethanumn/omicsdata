@@ -9,6 +9,7 @@ Subpackages
 
    omicsdata.npz
    omicsdata.ssm
+   omicsdata.tree
 
 Module contents
 ---------------
