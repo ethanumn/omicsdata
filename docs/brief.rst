@@ -49,7 +49,7 @@ Simple somatic mutation file
 
 The simple somatic mutation (SSM) file format is a human-readable format that contain single nucleotide variant (SNV) data from bulk DNA sequencing.  The data for a simple somatic mutation file can be extracted from a *variant call format* (VCF) file (see `omicsdata/examples`. An alternative description of the SSM format can be found `here <https://www.sciencedirect.com/science/article/pii/S266616672200586X>`_.
 
-The SSM file format is a tab-delimited format. The first line of an SSM file is the header containing the following columns: *id*, *name*,*var_reads*, *total_reads*, *var_read_prob*. Each subsequent line provides data for an individual SNV or *mutation*. Here is a description for each of these columns:
+The SSM file format is a tab-delimited format. The first line of an SSM file is the header containing the following columns: *id*, *name*, *var_reads*, *total_reads*, *var_read_prob*. Each subsequent line provides data for an individual SNV or *mutation*. Here is a description for each of these columns:
 
   * **id**: a unique identifier that must match the following regular expression *s\d+*. The numeric value in the *id* field does not need to be contiguous. For example, the first mutation in an SSM file can have an *id* of *s0*, the second mutation could have an *id* of *s1*, etc.  
   
@@ -129,3 +129,15 @@ And here is some example code to go from an adjacency matrix to an ancestry matr
     adjacency_matrix[1,2] = 1
     adjacency_matrix[2,3] = 1
     ancestry_matrix = adj_to_anc(adjacency_matrix)
+
+
+We can also convert an adjacency matrix to a `Newick file format <https://en.wikipedia.org/wiki/Newick_format>`_:
+
+.. code-block:: python
+
+    import numpy as np
+    from omicsdata.tree.newick import adj_to_newick 
+    adjacency_matrix = np.eye(5)
+    adjacency_matrix[1,2] = 1
+    adjacency_matrix[2,3] = 1
+    newick_string = adj_to_newick(adjacency_matrix)

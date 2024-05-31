@@ -28,6 +28,14 @@ omicsdata.ssm.constants module
    :undoc-members:
    :show-inheritance:
 
+omicsdata.ssm.convert module
+------------------------------
+
+.. automodule:: omicsdata.ssm.convert
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 omicsdata.ssm.parse module
 --------------------------
 

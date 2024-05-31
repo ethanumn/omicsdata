@@ -63,7 +63,7 @@ def convert_all_variants_to_tuples(variants):
     """
     return [convert_variant_dict_to_tuple(variants[V]) for V in list(variants.keys())]
 
-def make_supervar(name, variants):
+def make_supervar(name, variants, fill_chr_pos=False):
     """Makes a supervariant given a list of variants
     
     Parameters
@@ -75,6 +75,10 @@ def make_supervar(name, variants):
         A list of 'variant' dictionaries. Each variant dictionary contains the following keys:'id' (unique identifier), 'name' (string identifier), 
         'var_reads' (array of variants reads for each sample),  'total_reads' (array of total reads for each sample)
         'omega_v' (array of variant read probabilities for each sample)
+
+    fill_chr_pos : bool
+        A flag to fill the chromosome and position fields for each supervariant. This will only work 
+        if all variant names match the pattern '{chromosome}_{position}'
 
     Returns
     -------
@@ -94,11 +98,20 @@ def make_supervar(name, variants):
     V_hat = np.minimum(V, N_hat)
     omega_v_hat = 0.5 * np.ones(S)
 
+    chrom = None 
+    pos = None
+
+    # fill chromosome and position if given flag and the name field matches pattern
+    if fill_chr_pos:
+        if all([len(var[Variants_Keys.NAME].split("_")) == 2 for var in variants]):
+            chrom = np.array([var[Variants_Keys.NAME].split("_")[0] for var in variants])
+            pos = np.array([var[Variants_Keys.NAME].split("_")[1] for var in variants])
+
     supervariant = {
         Variants_Keys.ID:          name,
         Variants_Keys.NAME:        name,
-        Variants_Keys.CHROM:       None,
-        Variants_Keys.POS:         None,
+        Variants_Keys.CHROM:       chrom,
+        Variants_Keys.POS:         pos,
         Variants_Keys.OMEGA_V:     omega_v_hat,
         Variants_Keys.VAR_READS:   np.round(np.sum(V_hat, axis=0)).astype(np.int32),
         Variants_Keys.TOTAL_READS: np.round(np.sum(N_hat, axis=0)).astype(np.int32),
@@ -110,7 +123,7 @@ def make_supervar(name, variants):
 
     return supervariant
 
-def clusters_to_supervars(clusters, variants):
+def clusters_to_supervars(clusters, variants, fill_chr_pos=False):
     """Converts clusters into supervariants
     
     Parameters
@@ -124,6 +137,10 @@ def clusters_to_supervars(clusters, variants):
         'var_reads' (array of variants reads for each sample),  'total_reads' (array of total reads for each sample)
         'omega_v' (array of variant read probabilities for each sample)
 
+    fill_chr_pos : bool
+        A flag to fill the chromosome and position fields for each supervariant. This will only work 
+        if all variant names match the pattern '{chromosome}_{position}'
+
     Returns
     -------
     dictionary
@@ -136,7 +153,7 @@ def clusters_to_supervars(clusters, variants):
         assert len(cluster) > 0, "Cannot make a supervariant from an empty list"
         cluster_variants = [variants[vid] for vid in cluster]
         name = 'S%s' % (len(supervars) + 1)
-        supervars[name] = make_supervar(name, cluster_variants)
+        supervars[name] = make_supervar(name, cluster_variants, fill_chr_pos)
 
     return supervars
 
@@ -182,5 +199,6 @@ def supervars_to_binom_params(supervars):
     V = np.array([supervars[S][Variants_Keys.VAR_READS] for S in svids])
     R = np.array([supervars[S][Variants_Keys.REF_READS] for S in svids])
     omega_v = np.array([supervars[S][Variants_Keys.OMEGA_V] for S in svids])
+
     assert np.all(omega_v == 0.5), "supervariant omega_v is incorrect"
     return V, R, omega_v
