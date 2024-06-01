@@ -20,6 +20,15 @@ omicsdata.tree.parents module
    :undoc-members:
    :show-inheritance:
 
+omicsdata.tree.neutree module
+-----------------------------
+
+.. automodule:: omicsdata.tree.neutree
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
 Module contents
 ---------------
 

@@ -141,3 +141,11 @@ We can also convert an adjacency matrix to a `Newick file format <https://en.wik
     adjacency_matrix[1,2] = 1
     adjacency_matrix[2,3] = 1
     newick_string = adj_to_newick(adjacency_matrix)
+
+Here is an example of reading a Neutree file:
+
+.. code-block:: python
+
+    from omicsdata.tree import neutree 
+    
+    ntree = neutree.load("/path/to/neutree/file.neutree.npz")

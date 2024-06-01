@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.join(os.path.abspath('..'),'src'))
 project = 'omicsdata'
 copyright = '2024, Ethan Kulman'
 author = 'Ethan Kulman'
-release = '1.01'
+release = '1.02'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -30,5 +30,5 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme = 'sphinx_rtd_theme'
-html_static_path = ['_static']
+html_static_path = []
 autodoc_mock_imports = ['numpy', 'pandas']
