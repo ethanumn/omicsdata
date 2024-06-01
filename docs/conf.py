@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.join(os.path.abspath('..'),'src'))
 project = 'omicsdata'
 copyright = '2024, Ethan Kulman'
 author = 'Ethan Kulman'
-release = '1.02'
+release = '1.03'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

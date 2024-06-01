@@ -12,6 +12,14 @@ omicsdata.tree.adj module
    :undoc-members:
    :show-inheritance:
 
+omicsdata.tree.columns module
+-----------------------------
+
+.. automodule:: omicsdata.tree.columns
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 omicsdata.tree.parents module
 -----------------------------
 
@@ -21,7 +29,7 @@ omicsdata.tree.parents module
    :show-inheritance:
 
 omicsdata.tree.neutree module
------------------------------
+--------------------------------------
 
 .. automodule:: omicsdata.tree.neutree
    :members:
@@ -32,7 +40,7 @@ omicsdata.tree.neutree module
 Module contents
 ---------------
 
-.. automodule:: omicsdata.tree
+.. automodule:: tree
    :members:
    :undoc-members:
    :show-inheritance:
